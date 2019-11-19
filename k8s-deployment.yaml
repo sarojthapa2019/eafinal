@@ -1,47 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: accountService-deployment
+  name: accsv-deployment
   labels:
-    app: accountService
+    app: accsv
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: accountService
+      app: accsv
   template:
     metadata:
       labels:
-        app: accountService
+        app: accsv
 
     spec:
       containers:
-        - name: accountService
-          image: sarose301/accountService:latest
+        - name: accsv
+          image: sarose301/accsv:latest
           ports:
             - containerPort: 8080
           env:
             - name: JWT_SECRET
               valueFrom:
                 configMapKeyRef:
-                  name: accountService-config
+                  name: accsv-config
                   key: jwt
             #MONGO
             - name: DB_PATH
               valueFrom:
                 configMapKeyRef:
-                    name: accountService-config
+                    name: accsv-config
                     key: dbpath
             #Redis
             - name: Redis_Path
               valueFrom:
                 configMapKeyRef:
-                    name: accountService-config
+                    name: accsv-config
                     key: redispath
 
             - name: Redis_Port
               valueFrom:
                 configMapKeyRef:
-                    name: accountService-config
+                    name: accsv-config
                     key: redisport
 

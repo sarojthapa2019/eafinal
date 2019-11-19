@@ -1,6 +1,6 @@
 
 
-containerID := $(shell docker ps -a -q --filter ancestor=sarose301/accountService:latest)
+containerID := $(shell docker ps -a -q --filter ancestor=sarose301/accsv:latest)
 
 #===================  maven  ===========================
 clean:
@@ -12,24 +12,24 @@ run-local: build
 
 #===================  docker  ===========================
 docker-build: build
-	docker build -t sarose301/accountService:latest .
+	docker build -t sarose301/accsv:latest .
 
 
 docker-run: docker-build
-	docker run -p 8080:8080 sarose301/accountService:latest
+	docker run -p 8080:8080 sarose301/accsv:latest
 
 
 docker-login:
 	docker login
 
 docker-push: docker-login docker-build
-	docker push sarose301/accountService:latest
+	docker push sarose301/accsv:latest
 
 docker-pull: docker-login
-	docker pull sarose301/accountService:latest
+	docker pull sarose301/accsv:latest
 
 docker-bash:
-	docker exec -ti sarose301/accountService:latest /bin/sh
+	docker exec -ti sarose301/accsv:latest /bin/sh
 
 docker-containerID:
 	@echo running: $(containerID)
@@ -90,7 +90,7 @@ k8s-persistence-create:
 	kubectl apply -f k8s-persistence-volumn.yaml
 	kubectl apply -f k8s-persistence-database.yaml
 	echo "create initial db, run this when DB service"
-	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accountService-db -ppassword -e 'create database db_example;'"
+	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accsv-db -ppassword -e 'create database db_example;'"
 
 k8s-persistence-delete:
 	kubectl delete -f k8s-persistence-database.yaml
@@ -105,7 +105,7 @@ k8s-info:
 	kubectl get configmaps
 	kubectl get services
 	kubectl get pods
-	echo "You can also check DB via:\n kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accountService-db -ppassword "
+	echo "You can also check DB via:\n kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accsv-db -ppassword "
 
 
 
