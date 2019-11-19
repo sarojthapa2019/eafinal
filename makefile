@@ -87,14 +87,14 @@ k8s-role-delete:
 
 
 k8s-persistence-create:
-	kubectl apply -f k8s-persistence-volumn.yaml
-	kubectl apply -f k8s-persistence-database.yaml
-	echo "create initial db, run this when DB service"
-	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accsv-db -ppassword -e 'create database db_example;'"
+	#kubectl apply -f k8s-persistence-volumn.yaml
+	#kubectl apply -f k8s-persistence-database.yaml
+	#echo "create initial db, run this when DB service"
+	#echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h accsv-db -ppassword -e 'create database db_example;'"
 
 k8s-persistence-delete:
-	kubectl delete -f k8s-persistence-database.yaml
-	kubectl delete -f k8s-persistence-volumn.yaml
+	#kubectl delete -f k8s-persistence-database.yaml
+	#kubectl delete -f k8s-persistence-volumn.yaml
 
 
 k8s-info:
